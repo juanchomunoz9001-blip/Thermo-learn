@@ -1,0 +1,513 @@
+/* --- RESPLANDOR DIFUMINADO EXTERIOR (PULSO) --- */
+@property --button-surface-color {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #ff6b00;
+}
+
+.contour-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px; /* Misma curvatura del botón */
+    box-sizing: border-box;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1;
+    /* Genera el efecto difuminado usando sombras en lugar de líneas sólidas */
+    box-shadow: 0 0 12px 4px color-mix(in srgb, var(--button-surface-color) 80%, transparent);
+}
+
+/* Clase que activa la animación del resplandor */
+.contour-wave.active-pulse {
+    animation: glow-outward 0.4s ease-out;
+}
+
+@keyframes glow-outward {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 8px 2px color-mix(in srgb, var(--button-surface-color) 80%, transparent);
+    }
+    100% {
+        transform: scale(1.25); /* El resplandor se estira un 25% hacia afuera del botón */
+        opacity: 0;             /* Se desvanece completamente */
+        box-shadow: 0 0 20px 8px color-mix(in srgb, var(--button-surface-color) 0%, transparent);
+    }
+}
+
+/* --- VIBRACIÓN ANTISPAM --- */
+.shake-button {
+    animation: shake-horizontal 0.3s ease-in-out;
+}
+
+@keyframes shake-horizontal {
+    0%, 100% { translate: 0; }
+    25% { translate: -6px 0; }
+    50% { translate: 6px 0; }
+    75% { translate: -4px 0; }
+}
+
+/* --- Capa Sandbox: Componentes de Carga y Ventana Emergente --- */
+
+/* Cargador circular interno del botón */
+.spinner-loader {
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.pulse-button:not(.loading-active) .spinner-loader {
+    transition: opacity 0s, visibility 0s;
+}
+
+/* Estado activo del cargador en JS */
+.pulse-button.loading-active .spinner-loader {
+    opacity: 0;
+    visibility: hidden;
+    animation: none;
+}
+.pulse-button.loading-active .button-text {
+    width: 18px;
+    height: 18px;
+    font-size: 0;
+    color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin-clockwise 0.6s linear infinite;
+    pointer-events: none;
+}
+
+.pulse-button.loading-active .spinner-loader,
+.pulse-button.loading-active .button-text {
+    transition: opacity 0.2s ease, visibility 0s, width 0.35s ease, height 0.35s ease, font-size 0.35s ease, color 0.25s ease, border-width 0.25s ease, border-color 0.25s ease;
+}
+
+.pulse-button.loading-active.loading-indicator-ready .spinner-loader {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease, visibility 0s;
+    animation: spin-clockwise 0.6s linear infinite;
+}
+
+.pulse-button.loading-active.loading-indicator-ready .button-text {
+    border-color: transparent;
+    animation: none;
+}
+
+.sandbox-content.state-manifesto .pulse-button.loading-active.loading-green {
+    --button-surface-color: #2e9d50;
+    transition: --button-surface-color 2.5s ease, transform 0.2s;
+}
+
+.pulse-button.loading-active.loading-green:hover,
+.pulse-button.welcome-complete:hover {
+    --button-surface-color: #278a45;
+}
+
+.pulse-button.welcome-complete {
+    --button-surface-color: #2e9d50;
+}
+
+.sandbox-content.state-manifesto .pulse-button.welcome-complete {
+    left: 50%;
+    right: auto;
+}
+
+.pulse-button {
+    --button-surface-color: #ff6b00;
+    background-color: var(--button-surface-color);
+    transition: background-color 0.2s, --button-surface-color 0.2s, transform 0.2s;
+}
+
+.pulse-button:hover {
+    --button-surface-color: #ff7c1a;
+}
+
+.pulse-button.liquid-transitioning {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.liquid-transition-surface {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    background-color: #2e9d50;
+    will-change: left, top, width, height, border-radius, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contour-wave.active-pulse {
+        animation-duration: 0.01ms;
+    }
+}
+
+.pulse-button.welcome-complete .button-text {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    color: #ffffff;
+    font-size: 1rem;
+    white-space: nowrap;
+    animation: none;
+    transition: none;
+}
+
+.pulse-button.loading-active:hover {
+    transform: translateY(var(--manifesto-button-shift, 0));
+}
+
+.sandbox-content.state-manifesto .pulse-button.loading-active {
+    transition: background-color 0.2s;
+    transform: translateY(var(--loading-button-offset, var(--manifesto-button-shift, 0)));
+}
+
+@keyframes spin-clockwise {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Superposición y Contenedor de la Ventana Emergente */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; /* Por encima de la ventana flotante */
+    pointer-events: none;
+    transition: background-color 1.5s ease;
+}
+
+.popup-overlay.pop-active {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-box {
+    background-color: #ffffff;
+    border: 2px solid #ff6b00; /* Borde naranja de ThermoLearn */
+    border-radius: 16px;
+    padding: 18px 24px;
+    width: min(82vw, 320px);
+    text-align: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    transform: translateY(-35px) scale(0.85);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.5s ease; /* Efecto Pop con sutil rebote elástico */
+}
+
+.popup-information-content {
+    position: absolute;
+    left: clamp(16px, 4vw, 32px);
+    right: clamp(16px, 4vw, 32px);
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    text-align: left;
+}
+
+.popup-information-content.information-visible {
+    opacity: 1;
+}
+
+.popup-information-content p {
+    margin: 0 0 12px;
+    color: #333333;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.popup-information-content p:last-child {
+    margin-bottom: 0;
+}
+
+.popup-information-content h2 {
+    margin: 16px 0 8px;
+    color: #ff6b00;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.popup-information-content ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+    color: #333333;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.popup-information-content li {
+    padding-left: 2px;
+    margin-bottom: 4px;
+}
+
+.popup-information-content li:last-child {
+    margin-bottom: 0;
+}
+
+/* Estados de Activación del Pop-Up */
+.popup-overlay.pop-active .popup-box {
+    transform: translateY(-35px) scale(1);
+}
+
+/* Tipografías internas de la Alerta */
+.popup-main-title {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ff6b00;
+    margin: 0;
+}
+
+.popup-secondary-text {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.85rem;
+    color: #8e8e93; /* Gris opaco estándar de sistema de UI */
+    margin: 8px 0 0 0;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.popup-secondary-text.fade-show {
+    opacity: 1;
+}
+
+/* Desvanecimiento ordenado para el texto gris */
+.popup-secondary-text.fade-hide {
+    opacity: 0;
+}
+
+.popup-overlay.pop-morphing {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.interactive-title.title-morphing-out {
+    opacity: 0;
+    transition: opacity 0.7s ease;
+}
+
+.sandbox-content.state-reveal-text .manifesto-container.manifesto-morphing-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 1.5s ease, visibility 0s linear 1.5s;
+}
+
+.popup-box.espera-panel-exiting {
+    animation: esperaPanelExit 650ms ease-out forwards;
+}
+
+.interactive-title.espera-title-exiting > span {
+    animation: esperaLetterExit 450ms cubic-bezier(0.55, 0.05, 0.9, 0.45) both;
+}
+
+.interactive-title.espera-title-entering > span {
+    animation: esperaLetterEnter 420ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.espera-title-exiting > span:nth-child(2),
+.espera-title-entering > span:nth-child(2) {
+    animation-delay: 45ms;
+}
+
+.espera-title-exiting > span:nth-child(3),
+.espera-title-entering > span:nth-child(3) {
+    animation-delay: 90ms;
+}
+
+.espera-title-exiting > span:nth-child(4),
+.espera-title-entering > span:nth-child(4) {
+    animation-delay: 135ms;
+}
+
+.espera-title-exiting > span:nth-child(5),
+.espera-title-entering > span:nth-child(5) {
+    animation-delay: 180ms;
+}
+
+.espera-title-exiting > span:nth-child(6),
+.espera-title-entering > span:nth-child(6) {
+    animation-delay: 225ms;
+}
+
+.espera-title-exiting > span:nth-child(2) {
+    --espera-exit-y: -3px;
+    --espera-exit-rotation: -2deg;
+}
+
+.espera-title-exiting > span:nth-child(3) {
+    --espera-exit-y: 3px;
+    --espera-exit-rotation: 2deg;
+}
+
+.espera-title-exiting > span:nth-child(4) {
+    --espera-exit-y: -2px;
+    --espera-exit-rotation: -1deg;
+}
+
+.espera-title-exiting > span:nth-child(5) {
+    --espera-exit-y: 2px;
+    --espera-exit-rotation: 1deg;
+}
+
+.espera-title-exiting > span:nth-child(6) {
+    --espera-exit-y: -2px;
+    --espera-exit-rotation: 2deg;
+}
+
+.espera-title-entering > span:nth-child(2) {
+    --espera-entry-y: -3px;
+    --espera-entry-rotation: 2deg;
+    --espera-entry-overshoot: 4px;
+}
+
+.espera-title-entering > span:nth-child(3) {
+    --espera-entry-y: 3px;
+    --espera-entry-rotation: -2deg;
+    --espera-entry-overshoot: -3px;
+}
+
+.espera-title-entering > span:nth-child(4) {
+    --espera-entry-y: -2px;
+    --espera-entry-rotation: 1deg;
+    --espera-entry-overshoot: 3px;
+}
+
+.espera-title-entering > span:nth-child(5) {
+    --espera-entry-y: 2px;
+    --espera-entry-rotation: -1deg;
+    --espera-entry-overshoot: -4px;
+}
+
+.espera-title-entering > span:nth-child(6) {
+    --espera-entry-y: -2px;
+    --espera-entry-rotation: 2deg;
+    --espera-entry-overshoot: 3px;
+}
+
+@keyframes esperaPanelExit {
+    to {
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow: 0 0 0 0 transparent;
+    }
+}
+
+@keyframes esperaLetterExit {
+    to {
+        transform: translate3d(120vw, var(--espera-exit-y, 0), 0)
+            rotate(var(--espera-exit-rotation, 0deg));
+    }
+}
+
+@keyframes esperaLetterEnter {
+    0% {
+        transform: translate3d(-120vw, var(--espera-entry-y, 0), 0)
+            rotate(var(--espera-entry-rotation, 0deg));
+    }
+    82% {
+        transform: translate3d(var(--espera-entry-overshoot, 4px), 0, 0)
+            rotate(0.5deg);
+    }
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .interactive-title.title-morphing-out {
+        transition-duration: 1ms;
+    }
+
+    .popup-box.espera-panel-exiting,
+    .interactive-title.espera-title-exiting > span,
+    .interactive-title.espera-title-entering > span {
+        animation-duration: 1ms;
+        animation-delay: 0ms;
+    }
+}
+
+.interactive-title {
+    position: relative;
+}
+
+.interactive-title > .title-shimmer-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    color: transparent;
+    background-image: linear-gradient(
+        30deg,
+        transparent 46%,
+        rgba(255, 221, 177, 0.24) 48%,
+        rgba(255, 246, 226, 0.9) 49.7%,
+        #fffaf0 50%,
+        rgba(255, 214, 164, 0.58) 51%,
+        transparent 54%
+    );
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    pointer-events: none;
+    transform: none !important;
+    transition: none;
+    z-index: 1;
+}
+
+.interactive-title.title-shimmer-ready > .title-shimmer-overlay {
+    animation: titleShimmer 6s linear 4.2s infinite;
+}
+
+.interactive-title.title-shimmer-ready:hover > .title-shimmer-overlay {
+    animation: none;
+    visibility: hidden;
+}
+
+@keyframes titleShimmer {
+    0%,
+    12% {
+        background-position: 100% 0;
+    }
+    24%,
+    100% {
+        background-position: 0 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .interactive-title.title-shimmer-ready > .title-shimmer-overlay {
+        display: none;
+    }
+}

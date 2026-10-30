@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThermoLearn</title>
+    <link rel="stylesheet" href="Style/theme.css">
+    <link rel="stylesheet" href="Style/typography.css">
+    <link rel="stylesheet" href="Style/layout.css">
+    <link rel="stylesheet" href="Style/animations.css">
+</head>
+<body>
+
+    <div id="app-container">
+        <section id="view-presentacion" class="screen-view active-view">
+            <main class="floating-window">
+                <div class="sandbox-content">
+                    <h1 class="interactive-title">
+                        <span>T</span><span>h</span><span>e</span><span>r</span><span>m</span><span>o</span><span>L</span><span>e</span><span>a</span><span>r</span><span>n</span>
+                    </h1>
+                    <div class="title-underline"></div>
+
+                    <article class="manifesto-container">
+                        <h2 class="manifesto-subtitle">¿Qué somos?</h2>
+                        <p class="manifesto-paragraph">Somos una propuesta pedagógica localizada en el ambiente virtual de la Institución Educativa Marco Antonio Franco Rodríguez destinados a enseñar física y sus aplicaciones en la <strong class="highlight1-word">"vida cotidiana del día a día"</strong>, fomentando creatividad, imaginación y uso que los estudiantes le dan a lo aprendido con nuestro docente.</p>
+                        <p class="manifesto-paragraph">Thermo-Learn propone dar lecciones a los estudiantes para que logren conectar con la física y aprender a usarla, explicarla, detectarla, y expresarla en el ámbito más puro de esta: <strong class="highlight2-word">"la cotidianidad"</strong>.</p>
+                    </article>
+
+                    <button id="btn-action" class="pulse-button">
+                        <span class="button-text">Comenzar</span>
+                        <span class="contour-wave"></span>
+                        <span class="spinner-loader"></span>
+                    </button>
+                </div>
+            </main>
+        </section>
+        <section id="view-principal" class="screen-view" aria-hidden="true">
+            <main class="floating-window home-placeholder">
+                <div>
+                    <h1>Página principal</h1>
+                    <p>Destino preparado para la página principal de ThermoLearn.</p>
+                </div>
+            </main>
+        </section>
+    </div>
+
+    <script src="js/rutas.js"></script>
+    <script src="js/conversor.js"></script>
+    <script src="js/diagnostico.js"></script>
+    <script src="js/navegacion.js"></script>
+</body>
+</html>

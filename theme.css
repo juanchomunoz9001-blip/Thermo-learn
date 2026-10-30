@@ -1,0 +1,7 @@
+/* Paleta de colores e identidades del proyecto */
+:root {
+    --bg-universe: #000000;       /* Negro absoluto (El vacío) */
+    --bg-window: #f7f7f7;         /* Negro muy oscuro para la ventana */
+    --window-border: rgba(255, 255, 255, 0.08); /* Borde sutil para que se note en el vacío */
+    --window-radius: 32px;        /* Bordes redondeados elegantes */
+}
