@@ -35,34 +35,61 @@
             </main>
         </section>
         <section id="view-principal" class="screen-view" aria-hidden="true">
-            <main class="floating-window home-dashboard" aria-labelledby="home-title">
+            <main id="diagnostic-screen" class="floating-window home-dashboard diagnostic-screen" aria-labelledby="diagnostic-title">
                 <header class="home-header">
-                    <p class="home-eyebrow">FÍSICA PARA LA VIDA DIARIA</p>
-                    <h1 id="home-title">Entiende el calor que te rodea</h1>
-                    <p class="home-intro">Explora ideas de termodinámica con ejemplos sencillos y aprende a reconocerlas en situaciones cotidianas.</p>
+                    <p class="home-eyebrow">THERMOLEARN · ANTES DE EMPEZAR</p>
+                    <h1 id="diagnostic-title">Pregunta pre-Diagnóstico</h1>
+                    <p class="home-intro">¿Reconoces alguno de estos temas? Selecciona los que conozcas y califica tu seguridad en cada uno. Puedes elegir varios.</p>
                 </header>
 
-                <section class="home-learning" aria-labelledby="learning-title">
-                    <h2 id="learning-title">Tu ruta de aprendizaje</h2>
-                    <p class="home-section-intro">Abre cada tema para comenzar. Puedes recorrerlos en orden o elegir el que más te interese.</p>
-                    <div class="home-topics">
-                        <details class="home-topic" open>
-                            <summary><span class="topic-number">01</span><span>Temperatura y equilibrio térmico</span></summary>
-                            <p>La temperatura indica qué tan caliente o frío está un cuerpo. Cuando dos objetos en contacto alcanzan la misma temperatura, llegan al equilibrio térmico.</p>
-                        </details>
-                        <details class="home-topic">
-                            <summary><span class="topic-number">02</span><span>Calor y transferencia de energía</span></summary>
-                            <p>El calor es energía que se transfiere de un cuerpo más caliente a otro más frío. Puede viajar por conducción, convección o radiación, como ocurre al cocinar o sentir el sol.</p>
-                        </details>
-                        <details class="home-topic">
-                            <summary><span class="topic-number">03</span><span>Cambios de estado</span></summary>
-                            <p>Al ganar o perder energía, una sustancia puede pasar entre los estados sólido, líquido y gaseoso. El hielo que se derrite y el agua que hierve son ejemplos de estos cambios.</p>
-                        </details>
+                <section class="diagnostic-learning" aria-label="Temas de física">
+                    <div id="diagnostic-topics" class="diagnostic-topics">
+                        <article class="diagnostic-topic-card" data-topic="temperatura">
+                            <button class="diagnostic-topic" type="button">Temperatura</button>
+                        </article>
+                        <article class="diagnostic-topic-card" data-topic="equilibrio-termico">
+                            <button class="diagnostic-topic" type="button">Equilibrio térmico</button>
+                        </article>
+                        <article class="diagnostic-topic-card" data-topic="calor">
+                            <button class="diagnostic-topic" type="button">Calor y energía térmica</button>
+                        </article>
+                        <article class="diagnostic-topic-card" data-topic="transferencia-calor">
+                            <button class="diagnostic-topic" type="button">Transferencia de calor</button>
+                        </article>
+                        <article class="diagnostic-topic-card" data-topic="conduccion">
+                            <button class="diagnostic-topic" type="button">Conducción térmica</button>
+                        </article>
+                        <article class="diagnostic-topic-card" data-topic="conveccion">
+                            <button class="diagnostic-topic" type="button">Convección térmica</button>
+                        </article>
+                        <article class="diagnostic-topic-card" data-topic="radiacion">
+                            <button class="diagnostic-topic" type="button">Radiación térmica</button>
+                        </article>
+                        <article class="diagnostic-topic-card" data-topic="cambios-estado">
+                            <button class="diagnostic-topic" type="button">Cambios de estado</button>
+                        </article>
                     </div>
                 </section>
-                <p class="home-note">Observa estos fenómenos a tu alrededor: la física también está en lo cotidiano.</p>
+
+                <footer class="diagnostic-footer">
+                    <p id="diagnostic-progress" class="diagnostic-progress" aria-live="polite">Califica al menos un tema para continuar.</p>
+                    <button id="diagnostic-continue" class="diagnostic-continue" type="button" disabled aria-describedby="diagnostic-progress">Continuar</button>
+                </footer>
             </main>
         </section>
+        <section id="view-preguntas" class="screen-view" aria-hidden="true">
+            <main class="floating-window questions-placeholder" aria-labelledby="questions-title">
+                <p class="home-eyebrow">THERMOLEARN · DIAGNÓSTICO</p>
+                <h1 id="questions-title">Preguntas diagnósticas</h1>
+                <p>La prueba continuará aquí. Esta pantalla queda preparada para la siguiente etapa.</p>
+            </main>
+        </section>
+        <div id="diagnostic-loading" class="diagnostic-loading" role="status" aria-live="polite" hidden>
+            <div class="diagnostic-loading-card">
+                <span class="diagnostic-spinner" aria-hidden="true"></span>
+                <p>Preparando tu diagnóstico…</p>
+            </div>
+        </div>
     </div>
 
     <script src="js/rutas.js"></script>
