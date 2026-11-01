@@ -35,11 +35,32 @@
             </main>
         </section>
         <section id="view-principal" class="screen-view" aria-hidden="true">
-            <main class="floating-window home-placeholder">
-                <div>
-                    <h1>Página principal</h1>
-                    <p>Destino preparado para la página principal de ThermoLearn.</p>
-                </div>
+            <main class="floating-window home-dashboard" aria-labelledby="home-title">
+                <header class="home-header">
+                    <p class="home-eyebrow">FÍSICA PARA LA VIDA DIARIA</p>
+                    <h1 id="home-title">Entiende el calor que te rodea</h1>
+                    <p class="home-intro">Explora ideas de termodinámica con ejemplos sencillos y aprende a reconocerlas en situaciones cotidianas.</p>
+                </header>
+
+                <section class="home-learning" aria-labelledby="learning-title">
+                    <h2 id="learning-title">Tu ruta de aprendizaje</h2>
+                    <p class="home-section-intro">Abre cada tema para comenzar. Puedes recorrerlos en orden o elegir el que más te interese.</p>
+                    <div class="home-topics">
+                        <details class="home-topic" open>
+                            <summary><span class="topic-number">01</span><span>Temperatura y equilibrio térmico</span></summary>
+                            <p>La temperatura indica qué tan caliente o frío está un cuerpo. Cuando dos objetos en contacto alcanzan la misma temperatura, llegan al equilibrio térmico.</p>
+                        </details>
+                        <details class="home-topic">
+                            <summary><span class="topic-number">02</span><span>Calor y transferencia de energía</span></summary>
+                            <p>El calor es energía que se transfiere de un cuerpo más caliente a otro más frío. Puede viajar por conducción, convección o radiación, como ocurre al cocinar o sentir el sol.</p>
+                        </details>
+                        <details class="home-topic">
+                            <summary><span class="topic-number">03</span><span>Cambios de estado</span></summary>
+                            <p>Al ganar o perder energía, una sustancia puede pasar entre los estados sólido, líquido y gaseoso. El hielo que se derrite y el agua que hierve son ejemplos de estos cambios.</p>
+                        </details>
+                    </div>
+                </section>
+                <p class="home-note">Observa estos fenómenos a tu alrededor: la física también está en lo cotidiano.</p>
             </main>
         </section>
     </div>
