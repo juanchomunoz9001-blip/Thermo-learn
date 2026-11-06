@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThermoLearn</title>
+    <link rel="stylesheet" href="Style/theme.css">
+    <link rel="stylesheet" href="Style/typography.css">
+    <link rel="stylesheet" href="Style/layout.css">
+    <link rel="stylesheet" href="Style/animations.css">
+</head>
+<body>
+
+    <div id="app-container">
+        <section id="view-presentacion" class="screen-view active-view">
+            <main class="floating-window">
+                <div class="sandbox-content">
+                    <h1 class="interactive-title">
+                        <span>T</span><span>h</span><span>e</span><span>r</span><span>m</span><span>o</span><span>L</span><span>e</span><span>a</span><span>r</span><span>n</span>
+                    </h1>
+                    <div class="title-underline"></div>
+
+                    <article class="manifesto-container">
+                        <h2 class="manifesto-subtitle">¿Qué somos?</h2>
+                        <p class="manifesto-paragraph">Somos una propuesta pedagógica localizada en el ambiente virtual de la Institución Educativa Marco Antonio Franco Rodríguez destinados a enseñar física y sus aplicaciones en la <strong class="highlight1-word">"vida cotidiana del día a día"</strong>, fomentando creatividad, imaginación y uso que los estudiantes le dan a lo aprendido con nuestro docente.</p>
+                        <p class="manifesto-paragraph">Thermo-Learn propone dar lecciones a los estudiantes para que logren conectar con la física y aprender a usarla, explicarla, detectarla, y expresarla en el ámbito más puro de esta: <strong class="highlight2-word">"la cotidianidad"</strong>.</p>
+                    </article>
+
+                    <button id="btn-action" class="pulse-button">
+                        <span class="button-text">Comenzar</span>
+                        <span class="contour-wave"></span>
+                        <span class="spinner-loader"></span>
+                    </button>
+                </div>
+            </main>
+        </section>
+        <section id="view-principal" class="screen-view" aria-label="ThermoLearn diagnóstico" aria-hidden="true">
+            <main id="diagnostic-screen" class="floating-window home-dashboard diagnostic-screen" aria-labelledby="diagnostic-title" tabindex="-1">
+                <header class="home-header">
+                    <p class="home-eyebrow">THERMOLEARN · ANTES DE EMPEZAR</p>
+                    <h1 id="diagnostic-title">Pregunta pre-Diagnóstico</h1>
+                    <p class="home-intro">Despliega cada tema y califica cuánto comprendes de cada subtema.</p>
+                    <p class="diagnostic-local-note">Tus respuestas quedan en esta sesión y aún no se envían a un servidor.</p>
+                </header>
+
+                <section class="diagnostic-learning" aria-label="Temas de física">
+                    <div id="diagnostic-topics" class="diagnostic-topics"></div>
+                </section>
+
+                <footer class="diagnostic-footer">
+                    <p id="diagnostic-progress" class="diagnostic-progress" aria-live="polite">Califica al menos un subtema para continuar.</p>
+                    <button id="diagnostic-continue" class="diagnostic-continue" type="button" disabled aria-describedby="diagnostic-progress">Continuar</button>
+                </footer>
+            </main>
+            <main id="questions-screen" class="floating-window questions-screen" aria-labelledby="questions-title" tabindex="-1" hidden aria-hidden="true">
+                <header class="questions-header">
+                    <div class="questions-topbar">
+                        <button id="learn-start" class="learn-start" type="button" disabled>Empezar a aprender</button>
+                    </div>
+                    <p class="home-eyebrow">THERMOLEARN · DIAGNÓSTICO</p>
+                    <h1 id="questions-title">Preguntas diagnósticas</h1>
+                    <p id="question-intro">Responde las preguntas correspondientes a los temas que seleccionaste.</p>
+                    <p class="diagnostic-local-note">Tus respuestas se procesan en esta sesión y no se envían a un servidor.</p>
+                </header>
+                <p id="question-bank-status" class="question-bank-status" role="status" aria-live="polite"></p>
+                <section id="diagnostic-questions" class="diagnostic-questions" aria-label="Cuestionario diagnóstico"></section>
+                <footer class="questions-footer">
+                    <p id="question-progress" class="question-progress" aria-live="polite">Aún no hay preguntas cargadas.</p>
+                    <button id="questions-finish" class="diagnostic-continue" type="button" disabled hidden>Continuar</button>
+                </footer>
+                <p id="question-result" class="question-result" aria-live="polite" hidden></p>
+            </main>
+            <main id="learning-screen" class="floating-window learning-screen" aria-labelledby="learning-title" tabindex="-1" hidden aria-hidden="true">
+                <p class="home-eyebrow">THERMOLEARN · TU RUTA</p>
+                <h1 id="learning-title">Tus temas seleccionados</h1>
+                <p>Elige un subtema para entrar a su curso.</p>
+                <ul id="learning-topic-list" class="learning-topic-list"></ul>
+                <section id="learning-placeholder" class="learning-placeholder" aria-live="polite" hidden>
+                    <h2 id="learning-placeholder-title"></h2>
+                    <p>¡En formación! ¡Regrese pronto! :)</p>
+                    <button id="learning-topic-back" class="learning-back" type="button">Volver a mis temas</button>
+                    <div class="learning-mascot" aria-hidden="true">
+                        <img src="img/personaje-en-formacion.gif" alt="" width="600" height="228">
+                    </div>
+                </section>
+                <button id="learning-back" class="learning-back" type="button">Volver a mis respuestas</button>
+            </main>
+        </section>
+        <div id="diagnostic-loading" class="diagnostic-loading" role="status" aria-live="polite" hidden>
+            <div class="diagnostic-loading-card">
+                <span class="diagnostic-spinner" aria-hidden="true"></span>
+                <p>Preparando tu diagnóstico…</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/rutas.js"></script>
+    <script src="js/conversor.js"></script>
+    <script src="js/curriculum.js"></script>
+    <script src="js/diagnostico.js"></script>
+    <script src="js/banco_preguntas.js"></script>
+    <script src="js/preguntas.js"></script>
+    <script src="js/navegacion.js"></script>
+</body>
+</html>
